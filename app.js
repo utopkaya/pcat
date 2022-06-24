@@ -1,29 +1,37 @@
-const express = require("express")
-const app = express()
-const hostname = "localhost"
-const port = 3000
-const path = require("path")
+const express = require("express");
+const app = express();
+const ejs = require("ejs");
+const hostname = "localhost";
+const port = 3000;
+const path = require("path");
 
-// MIDDLEWARES 
+/* TEMPLATE ENGINE : EJS */
+
+app.set("view engine", "ejs"); // ejs'yi template engine olarak kullanacağımızı belirttik. (set() metodu ile)
+/* ejs, views klasörü içerisine bakar! */
+
+// MIDDLEWARES
+
 /* middleware'ler sırayla çalışırlar. Middleware use ile kullanılır ve next() metodunu
-kullanmazsak bir sonrakine geçemez */
-app.use(express.static("public"))
+kullanmazsak bir sonrakine geçemez diye not düşülsün */
+app.use(express.static("public"));
 
-app.get("/", (req,res) => {
-    res.sendFile(path.resolve(__dirname, "temp/index.html"))
-})
+/* ROUTES */
+app.get("/", (req, res) => {
+  // res.sendFile(path.resolve(__dirname, "temp/index.html"));
+  res.render("index");
+});
 
 // about page
-app.get("/about", (req,res) => {
-    res.sendFile(path.resolve(__dirname, "temp/about.html"))
-})
+app.get("/about", (req, res) => {
+  res.render("about");
+});
 
 // contact page
-app.get("/contact", (req,res) => {
-    res.send("contact page değişiklik")
-})
+app.get("/add", (req, res) => {
+  res.render("add");
+});
 
-app.listen(port, ()=>{
-    console.log(`server is online: http://${hostname}:${port}`)
-})
- 
+app.listen(port, () => {
+  console.log(`server is online: http://${hostname}:${port}`);
+});
