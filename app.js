@@ -4,6 +4,18 @@ const app = express()
 const hostname = "localhost"
 const port = 3000
 
+
+const myLogger = (req,res,next) => {
+    console.log("Middleware Log 1");
+    next()
+}
+
+// MIDDLEWARES 
+/* middleware'ler sırayla çalışırlar. Middleware use ile kullanılır ve next() metodunu
+kullanmazsak bir sonrakine geçemez */
+app.use(express.static("public"))
+app.use(myLogger)
+
 app.get("/", (req,res) => {
     res.send("hello world | site is open")
 })
@@ -21,3 +33,4 @@ app.get("/contact", (req,res) => {
 app.listen(port, ()=>{
     console.log(`server is online: http://${hostname}:${port}`)
 })
+ 
