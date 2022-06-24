@@ -1,28 +1,21 @@
 const express = require("express")
 const app = express()
-/* host and port */
 const hostname = "localhost"
 const port = 3000
-
-
-const myLogger = (req,res,next) => {
-    console.log("Middleware Log 1");
-    next()
-}
+const path = require("path")
 
 // MIDDLEWARES 
 /* middleware'ler sırayla çalışırlar. Middleware use ile kullanılır ve next() metodunu
 kullanmazsak bir sonrakine geçemez */
 app.use(express.static("public"))
-app.use(myLogger)
 
 app.get("/", (req,res) => {
-    res.send("hello world | site is open")
+    res.sendFile(path.resolve(__dirname, "temp/index.html"))
 })
 
 // about page
 app.get("/about", (req,res) => {
-    res.send("about page")
+    res.sendFile(path.resolve(__dirname, "temp/about.html"))
 })
 
 // contact page
