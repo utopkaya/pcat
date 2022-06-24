@@ -27,7 +27,7 @@ app.get("/about", (req, res) => {
   res.render("about");
 });
 
-// contact page
+// add page
 app.get("/add", (req, res) => {
   res.render("add");
 });
