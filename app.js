@@ -15,7 +15,7 @@ app.get("/about", (req,res) => {
 
 // contact page
 app.get("/contact", (req,res) => {
-    res.send("contact page")
+    res.send("contact page değişiklik")
 })
 
 app.listen(port, ()=>{
