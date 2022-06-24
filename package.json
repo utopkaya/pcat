@@ -1,0 +1,27 @@
+{
+  "name": "pcat",
+  "version": "1.0.0",
+  "description": "pcat - photo app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/utopkaya/pcat.git"
+  },
+  "keywords": [
+    "photo",
+    "app",
+    "camera"
+  ],
+  "author": "Umut Topkaya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/utopkaya/pcat/issues"
+  },
+  "homepage": "https://github.com/utopkaya/pcat#readme",
+  "devDependencies": {
+    "prettier": "2.7.1"
+  }
+}
