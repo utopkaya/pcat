@@ -47,10 +47,21 @@ app.get("/page", (req, res) => {
 });
 
 // Uploaded Photo
-app.post("/photos", async (req,res) => { // post create işlemi gerçekleşene kadar yönlendirme olmayacak! (async-await fonk)
+app.post("/save", async (req,res) => { // post create işlemi gerçekleşene kadar yönlendirme olmayacak! (async-await fonk)
   await Photo.create(req.body)
   res.redirect("/") // işlemlerin bittikten sonra index sayfasına git
 })
+
+app.get("/photos/:id", async (req, res) => {
+  // res.render("page");
+  // console.log(req.params.id); ->> ilgili id'yi bu şekilde yakaladık
+  
+  const photo = await Photo.findById(req.params.id)
+  res.render("photo", {
+    photo
+  })
+
+});
 
 app.listen(port, () => {
   console.log(`server is online: http://${hostname}:${port}`);

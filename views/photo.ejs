@@ -1,0 +1,59 @@
+<!-- Header -->
+<%- include("./partials/_header") -%>
+
+	<body>
+		<div class="tm-page-wrap mx-auto">
+			<div class="position-relative">
+
+				<!-- Navigation -->
+				<%- include("./partials/_navigation") -%>
+
+					<div class="tm-welcome-container tm-fixed-header tm-fixed-header-1">
+						<div class="text-center">
+							<p class="pt-5 px-3 tm-welcome-text tm-welcome-text-2 mb-1 text-white mx-auto">Background
+								image can be fixed. Content will simply slide over.</p>
+						</div>
+					</div>
+
+					<!-- Header image -->
+					<div id="tm-fixed-header-bg"></div>
+			</div>
+
+			<!-- Page content -->
+			<div class="container-fluid">
+				<div class="mx-auto tm-content-container">
+					<main>
+						<div class="row mb-5 pb-4">
+							<div class="col-12">
+								<!-- Video player 1422x800 -->
+								<img src="https://images.unsplash.com/photo-1656326649262-35f9e10b2da6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" style="width: 97vw" alt="">
+							</div>
+						</div>
+						<div class="row mb-5 pb-5">
+							<div class="col-xl-8 col-lg-7">
+								<!-- Video description -->
+								<div class="tm-video-description-box">
+									<h2 class="mb-5 tm-video-title"><%= photo.title %></h2>
+									<p class="mb-4"><%= photo.description %></p>
+								</div>
+							</div>
+							<div class="col-xl-4 col-lg-5">
+								<!-- Share box -->
+								<div class="tm-bg-gray tm-share-box">
+									<a href="#"
+										class="tm-bg-white px-5 mb-4 d-inline-block tm-text-primary tm-likes-box tm-liked">
+										<i class="fas fa-heart mr-3 tm-liked-icon"></i>
+										<i class="far fa-heart mr-3 tm-not-liked-icon"></i>
+										<span id="tm-likes-count">Update Photo</span>
+									</a>
+									<div>
+										<button
+											class="btn btn-danger p-0 tm-btn-animate tm-btn-download tm-icon-download"><span>Delete
+												Photo</span></button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</main>
+
+					<%- include("./partials/_footer") -%>
