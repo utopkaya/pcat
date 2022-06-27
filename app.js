@@ -42,6 +42,10 @@ app.get("/add", (req, res) => {
   res.render("add");
 });
 
+app.get("/page", (req, res) => {
+  res.render("page");
+});
+
 // Uploaded Photo
 app.post("/photos", async (req,res) => { // post create işlemi gerçekleşene kadar yönlendirme olmayacak! (async-await fonk)
   await Photo.create(req.body)
