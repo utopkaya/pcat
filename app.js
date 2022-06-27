@@ -66,8 +66,6 @@ app.post("/photos", (req,res) => {
   })
   res.redirect("/") // işlemlerin bittikten sonra index sayfasına git
 })
-
-
 app.listen(port, () => {
   console.log(`server is online: http://${hostname}:${port}`);
 });
