@@ -1,13 +1,14 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
-const mongoose = require("mongoose")
+const fileUpload = require("express-fileupload");
+const path = require("path");
 const ejs = require("ejs");
 const hostname = "localhost";
 const port = 3000;
-const path = require("path");
-const Photo = require("./models/Photo")
+const Photo = require("./models/Photo");
 /* DATABASE CONNECTION */
-mongoose.connect("mongodb://localhost/pcat-blog")
+mongoose.connect("mongodb://localhost/pcat-blog");
 
 /* TEMPLATE ENGINE : EJS */
 
@@ -15,10 +16,11 @@ app.set("view engine", "ejs"); // ejs'yi template engine olarak kullanacağımı
 /* ejs, views klasörü içerisine bakar! */
 
 // MIDDLEWARES
-app.use(express.static("public"));
-app.use(express.urlencoded({extended:true}))
-app.use(express.json())
 
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(fileUpload());
 
 /* ROUTES */
 
@@ -26,10 +28,9 @@ app.use(express.json())
 app.get("/", async (req, res) => {
   // res.sendFile(path.resolve(__dirname, "temp/index.html"))
 
-  const photos = await Photo.find({})
+  const photos = await Photo.find({});
 
-  res.render("index", {photos:photos});
-
+  res.render("index", { photos: photos });
 });
 
 // about page
@@ -47,26 +48,30 @@ app.get("/page", (req, res) => {
 });
 
 // Uploaded Photo
-app.post("/save", async (req,res) => { // post create işlemi gerçekleşene kadar yönlendirme olmayacak! (async-await fonk)
-  await Photo.create(req.body)
-  res.redirect("/") // işlemlerin bittikten sonra index sayfasına git
-})
+
+app.post("/save", async (req, res) => {
+  // post create işlemi gerçekleşene kadar yönlendirme olmayacak! (async-await fonk)
+  if(!req.files){
+    console.error("Dosya bulunamadi");
+    return
+  }
+
+  console.log(req.files.image);
+
+  // await Photo.create(req.body)
+  // res.redirect("/") // işlemlerin bittikten sonra index sayfasına git
+});
 
 app.get("/photos/:id", async (req, res) => {
   // res.render("page");
   // console.log(req.params.id); ->> ilgili id'yi bu şekilde yakaladık
-  
-  const photo = await Photo.findById(req.params.id)
+
+  const photo = await Photo.findById(req.params.id);
   res.render("photo", {
-    photo
-  })
-
-  
-
+    photo,
+  });
 });
 
 app.listen(port, () => {
   console.log(`server is online: http://${hostname}:${port}`);
 });
-
-
