@@ -61,6 +61,8 @@ app.get("/photos/:id", async (req, res) => {
     photo
   })
 
+  
+
 });
 
 app.listen(port, () => {
