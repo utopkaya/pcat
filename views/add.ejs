@@ -6,7 +6,7 @@
         <div class="tm-welcome-container tm-fixed-header tm-fixed-header-3">
           <div class="text-center">
             <p class="pt-5 px-3 tm-welcome-text tm-welcome-text-2 mb-1 mt-lg-0 mt-5 text-white mx-auto">
-              Talk to Us<br>about any question you have
+              Add Photo
             </p>
           </div>
         </div>
@@ -21,23 +21,17 @@
           <div class="row mt-3 mb-5 pb-3">
             <div class="col-12">
               <div class="mx-auto tm-about-text-container px-3">
-                <h2 class="tm-page-title mb-4 tm-text-primary">Contact our team</h2>
+                <h2 class="tm-page-title mb-4 tm-text-primary">Add New Photo</h2>
                 <p class="mb-4">
-                  Integer sit amet odio id libero tincidunt dignissim in eget arcu. Aliquam tristique ut magna sit amet
-                  tincidunt. Sed tempor tellus nulla, molestie luctus lectus tincidunt id. You are <u>not allowed</u> to
-                  re-distribute the template ZIP file on any template collection website.
+                  Sisteme yeni bir fotoğraf eklemek için bu sayfayı kullanın.
                 </p>
-                <p class="mb-4">Video Catalog is a free website template for your business. This is 100% free Bootstrap
-                  v4.4.1 layout. You can modify and adapt this template for your CMS websites. You can use it for
-                  commercial or non-commercial work. If you wish to suport <a rel="nofollow" target="_parent"
-                    href="https://templatemo.com" class="tm-text-primary">TemplateMo</a>, please contact us.</p>
               </div>
             </div>
           </div>
           <div class="mx-auto pb-3 tm-about-text-container px-3">
             <div class="row">
               <div class="col-lg-8 mb-5 offset-2">
-                <form method="post" action="/save" class="tm-contact-form">
+                <form method="post" action="/save" class="tm-contact-form" encType="multipart/form-data">
                   <div class="form-group">
                     <input type="text" name="title" class="form-control rounded-0" placeholder="Photo Name" required/>
                   </div>
@@ -45,7 +39,7 @@
                     <textarea rows="8" name="description" class="form-control rounded-0" placeholder="Photo Description"></textarea>
                   </div>
                   <div class="form-group">
-                    <input type="file" name="image" class="form-control rounded-0" style="padding-bottom: 3rem" encType="multipart/form-data">
+                    <input type="file" name="image" class="form-control rounded-0" style="padding-bottom: 3rem" >
                   </div>
 
                   <div class="form-group mb-0">

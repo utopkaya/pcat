@@ -4,9 +4,11 @@ const app = express();
 const fileUpload = require("express-fileupload");
 const path = require("path");
 const ejs = require("ejs");
+const fs = require("fs")
 const hostname = "localhost";
 const port = 3000;
 const Photo = require("./models/Photo");
+
 /* DATABASE CONNECTION */
 mongoose.connect("mongodb://localhost/pcat-blog");
 
@@ -28,7 +30,7 @@ app.use(fileUpload());
 app.get("/", async (req, res) => {
   // res.sendFile(path.resolve(__dirname, "temp/index.html"))
 
-  const photos = await Photo.find({});
+  const photos = await Photo.find({}).sort("-dataCreated");
 
   res.render("index", { photos: photos });
 });
@@ -52,25 +54,50 @@ app.get("/page", (req, res) => {
 app.post("/save", async (req, res) => {
   // post create işlemi gerçekleşene kadar yönlendirme olmayacak! (async-await fonk)
   if(!req.files){
-    console.error("Dosya bulunamadi");
-    return
+    console.log("dosya bulunamadı!");
   }
 
-  console.log(req.files.image);
+  // Create data!
+  const uploadDir = "public/uploads";
+  if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+  }
 
-  // await Photo.create(req.body)
-  // res.redirect("/") // işlemlerin bittikten sonra index sayfasına git
+  // Image Upload Process - Resim Yukleme Islemi
+  let uploadedImage = req.files.image; // gorsele ait tum bilgiler
+  let uploadPath = __dirname + "/public/uploads/" + uploadedImage.name; // gorselin yuklenecegi server'daki dosya yolu
+  uploadedImage.mv(uploadPath, async () => {
+    await Photo.create({
+      ...req.body,
+      photoUrl: "/uploads/" + uploadedImage.name,
+    });
+  });
+
+  res.redirect("/");
+
 });
 
 app.get("/photos/:id", async (req, res) => {
   // res.render("page");
   // console.log(req.params.id); ->> ilgili id'yi bu şekilde yakaladık
 
-  const photo = await Photo.findById(req.params.id);
-  res.render("photo", {
-    photo,
-  });
+  const photo = await Photo.findById(req.params.id)
+
+  res.render("photo", {photo})
+  console.log(photo.photoUrl);
+
 });
+
+// redirect
+app.get("/edit", async (req,res) => {
+  const editPhoto = await Photo.findById(req.params.id)
+  // res.render("edit")
+  console.log(editPhoto);
+})
+
+app.get("/edit/:id", (req, res)=>{
+  
+})
 
 app.listen(port, () => {
   console.log(`server is online: http://${hostname}:${port}`);
