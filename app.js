@@ -84,19 +84,25 @@ app.get("/photos/:id", async (req, res) => {
   const photo = await Photo.findById(req.params.id)
 
   res.render("photo", {photo})
-  console.log(photo.photoUrl);
 
 });
 
-// redirect
-app.get("/edit", async (req,res) => {
-  const editPhoto = await Photo.findById(req.params.id)
-  // res.render("edit")
-  console.log(editPhoto);
+// EDIT-UPDATE PHOTO
+
+app.get("/edit", (req,res) => {
+  res.render("edit")
 })
 
-app.get("/edit/:id", (req, res)=>{
-  
+app.get("/edit/:id", async (req, res)=>{
+  const editPhoto = await Photo.findById(req.params.id)
+  console.log(editPhoto);
+  res.render("edit", {editPhoto})
+})
+
+// UPDATE BUTTON
+
+app.post("/update", (req,res) => {
+  console.log("Bilgiler bu ekranda güncellenecek!");
 })
 
 app.listen(port, () => {
